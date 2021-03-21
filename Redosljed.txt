@@ -3,7 +3,7 @@
 3 - datoteka.js
 4 - git init
 5 - npm install nodemon --save-dev
-6 - u json => "start": "nodemon"
+6 - u json => "start": "nodemon datoteka.js"
 7 - install express
 8 - install knex
 9 - install body parser
