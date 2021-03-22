@@ -44,6 +44,8 @@ fs.appendFile('./hello.txt', ' Bitconnect!', err =>{
     }
 })
 
+fs.
+
 // fs.writeFile('bb.txt', 'bb nub', err =>{
 //     if (err) {
 //         console.log(err)
