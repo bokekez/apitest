@@ -7,3 +7,6 @@
 7 - install express
 8 - install knex
 9 - install body parser
+
+
+https://www.techonthenet.com/postgresql/index.php
