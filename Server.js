@@ -27,8 +27,7 @@ app.use(cors());
 
 app.post('/signin', (req, res) => {
     const { email, name, password } = req.body;
-    database('users')
-    
+    database('users')  
     .insert({
         email: email,
         name: name,
@@ -37,8 +36,30 @@ app.post('/signin', (req, res) => {
     .then(response => { // ima u knex docs
         res.json(response);
     })
-    .catch(err => res.status(400).json(err))
+    .catch(err => res.status(400).json('unable to join'))
     // res.json(database.users[database.users.length-1]);
+})
+
+app.get('/profile/:id', (req, res) =>{
+    const {id} = req.params;
+    let found = false;
+    database.select('*').from('users')
+    .where({
+        id: id
+    })
+    .then(user =>{
+        res.json(user[0])
+    })
+    if(!found){
+        res.status(400).json('not found')
+    }
+})
+
+app.get('/useri', (req, res) => {
+    database.select('*').from('users')
+    .then(response =>{
+        res.json(response)
+    })
 })
 
 app.post('/register', (req, res) => {
@@ -49,9 +70,9 @@ app.post('/register', (req, res) => {
         email: email,
         name: name,
         joined: new Date()
-    }).then(console.log)
-    .then(response => { // ima u knex docs
-        res.json(response);
+    })
+    .then(user => { // ima u knex docs
+        res.json(user[0]);
     })
     .catch(err => res.status(400).json(err))
     // res.json(database.users[database.users.length-1]);
