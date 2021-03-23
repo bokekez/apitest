@@ -1,11 +1,61 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
+const cors = require('cors');
+const knex = require('knex');
+
+const database = knex({
+    client: 'pg',
+    connection: {
+      host : '127.0.0.1',
+      user : 'postgres',
+      password : 'test',
+      database : 'test2'
+    }
+})
 
 const app = express();
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+
+app.use(cors());
+
+// database.select('*').from('users').then(data => {
+//     console.log(data)
+// });
+
+app.post('/signin', (req, res) => {
+    const { email, name, password } = req.body;
+    database('users')
+    
+    .insert({
+        email: email,
+        name: name,
+        joined: new Date()
+    }).then(console.log)
+    .then(response => { // ima u knex docs
+        res.json(response);
+    })
+    .catch(err => res.status(400).json(err))
+    // res.json(database.users[database.users.length-1]);
+})
+
+app.post('/register', (req, res) => {
+    const { email, name, password } = req.body;
+    database('users')
+    .returning('*')
+    .insert({
+        email: email,
+        name: name,
+        joined: new Date()
+    }).then(console.log)
+    .then(response => { // ima u knex docs
+        res.json(response);
+    })
+    .catch(err => res.status(400).json(err))
+    // res.json(database.users[database.users.length-1]);
+})
 
 app.get('/:id', (req, res) =>{
     res.status(404).send("not found");
@@ -19,17 +69,6 @@ app.get('/', (req, res) =>{
     res.send("Getting profile")
 })
 
-app.get('/profile', (req, res) => {
-    res.send("Getting profile")
-})
-app.post('/profile', (req, res) => {
-    console.log(req.body)
-    const user = {
-        name: 'Sally',
-        hobby: 'soccer'
-    }
-    res.send(user)
-})
 
 fs.readFile('./hello.txt', (err, data) => {
     if (err) {
@@ -38,13 +77,13 @@ fs.readFile('./hello.txt', (err, data) => {
     console.log(data.toString());
 })
 
-fs.appendFile('./hello.txt', ' Bitconnect!', err =>{
-    if (err) {
-        console.log(err);
-    }
-})
+// fs.appendFile('./hello.txt', ' Bitconnect!', err =>{
+//     if (err) {
+//         console.log(err);
+//     }
+// })
 
-fs.
+
 
 // fs.writeFile('bb.txt', 'bb nub', err =>{
 //     if (err) {
@@ -52,10 +91,10 @@ fs.
 //     }
 // })
 
-fs.unlink('./bb.txt', err => {
-    if (err) {
-        console.log(err);
-    }
-})
+// fs.unlink('./bb.txt', err => {
+//     if (err) {
+//         console.log(err);
+//     }
+// })
 
 app.listen(3000);

@@ -5,8 +5,27 @@
 5 - npm install nodemon --save-dev
 6 - u json => "start": "nodemon datoteka.js"
 7 - install express
+7 - install body parser
 8 - install knex
-9 - install body parser
+9 - npm install pg
+10 - npm install cors
+
 
 
 https://www.techonthenet.com/postgresql/index.php
+
+CREATE TABLE users (id serial PRIMARY KEY, name varchar(100), email text UNIQUE NOT NULL, joined TIMESTAMP NOT NULL);
+
+CREATE TABLE login (id serial PRIMARY KEY, hash varchar(100) NOT NULL, email text UNIQUE NOT NULL);
+
+knex -> const knex = require('knex')({
+  client: 'mysql',
+  connection: {
+    host : '127.0.0.1',
+    user : 'your_database_user',
+    password : 'your_database_password',
+    database : 'myapp_test'
+  }
+});
+
+-> knex dokumentacija
