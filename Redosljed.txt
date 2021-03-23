@@ -29,3 +29,14 @@ knex -> const knex = require('knex')({
 });
 
 -> knex dokumentacija
+
+
+CREATE TABLE table_name (column_1 datatype, column_2 datatype);
+
+\d vidit tablice
+
+\c connect to database
+
+INSERT INTO (column_1, column_2) VALUES ('value_1', 'value_2');
+
+SELECT * FROM table_name;
