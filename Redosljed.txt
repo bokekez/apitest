@@ -1,7 +1,7 @@
 1 - mkdir
 2 - otvorit u vscode
 3 - datoteka.js
-4 - git init
+4 - git init/npm init
 5 - npm install nodemon --save-dev
 6 - u json => "start": "nodemon datoteka.js"
 7 - install express
