@@ -10,7 +10,7 @@
 9 - npm install pg
 10 - npm install cors
 
-
+psql -U postgres
 
 https://www.techonthenet.com/postgresql/index.php
 
